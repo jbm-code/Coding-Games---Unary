@@ -1,24 +1,24 @@
 
 const MESSAGE = readline();
-//console.log(MESSAGE)
+console.error(MESSAGE)
 var B = ""
 
 function translateToBinaire(char) {   // fonction qui transforme le caractère en binaire
     var indexAscii = char.charCodeAt(0)  
-    //console.log("Ascii :", indexAscii)
+    console.error("Ascii :", indexAscii)
     var binaire = indexAscii.toString(2)
-    //console.log("binaire :", binaire)
-    return binaire
+    var binaire7bits = ("0000000".concat(binaire)).slice(-7)
+    console.error("binaire :", binaire)
+    console.error("binaire7bits :", binaire7bits)
+    return binaire7bits
 }
 
 for ( let i=0; i<MESSAGE.length; i++) {      // on boucle sur chaque caractère du message
     var bin = translateToBinaire(MESSAGE[i])
     B += bin
-    //console.log("B :", B)
 }
 
 B = B.match(/(.)\1*/g)                 // regex qui decoupe a chaque changement de caractère
-//console.log(B)
 
 var results = []
 for ( let i=0; i< B.length; i++) {
@@ -28,7 +28,7 @@ for ( let i=0; i< B.length; i++) {
     } else {
         result = "0 "                   // sinon premier caractère du bloc === 1
     }
-    //console.log("length :", B[i].length)
+    //console.error("length :", B[i].length)
     result += "0".repeat(B[i].length) 
     results.push(result)
 }
@@ -36,3 +36,4 @@ for ( let i=0; i< B.length; i++) {
 
 results = results.join(" ")
 console.log(results)
+
